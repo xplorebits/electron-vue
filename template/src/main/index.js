@@ -2,7 +2,9 @@
 'use strict'
 
 {{/if_eq}}
-import { app, BrowserWindow } from 'electron'{{#if_eq eslintConfig 'airbnb'}} // eslint-disable-line{{/if_eq}}
+import { app, BrowserWindow, Menu } from 'electron'{{#if_eq eslintConfig 'airbnb'}} // eslint-disable-line{{/if_eq}}
+
+const os = require('os')
 
 /**
  * Set `__static` path to static files in production
