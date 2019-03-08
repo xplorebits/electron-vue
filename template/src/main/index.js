@@ -93,10 +93,10 @@ app.on('activate', () => {
 
 /**
  * Customize application menu
- */
-function customizeAppMenu (window, menu) {
-  /* const menuItem = menu.getMenuItemById('id') */
-}
+ * /
+/* function customizeAppMenu (window, menu) {
+  // const menuItem = menu.getMenuItemById('id')
+} */
 
 /**
  * Auto Updater
