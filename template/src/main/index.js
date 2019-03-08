@@ -12,6 +12,47 @@ if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\'){{#if_eq eslintConfig 'airbnb'}} // eslint-disable-line{{/if_eq}}
 }
 
+// Set about panel for macOS. This will be ignored for windows
+if (os.platform() === 'darwin') {
+  app.setAboutPanelOptions({
+    applicationName: app.getName(),
+    applicationVersion: app.getVersion(),
+    copyright: '© <year> <author>. All rights reserved.'
+  })
+}
+
+// Import application menu configuration
+import appMenu from './menu/menu.js'
+import macMenu from './menu/macMenu.js'
+
+
+// macOS specific menu template
+if (process.platform === 'darwin') {
+  appMenu.unshift(macMenu)
+
+  appMenu[1].submenu.push(
+    { type: 'separator' },
+    {
+      label: 'Speech',
+      submenu: [
+        { role: 'startspeaking' },
+        { role: 'stopspeaking' }
+      ]
+    }
+  )
+
+  appMenu[3].submenu.push(
+    { role: 'close' },
+    { role: 'minimize' },
+    { role: 'zoom' },
+    { type: 'separator' },
+    { role: 'front' }
+  )
+}
+
+// Build electron Menu object from menu template
+const menu = Menu.buildFromTemplate(appMenu)
+
 let mainWindow
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
@@ -28,6 +69,7 @@ function createWindow () {
   })
 
   mainWindow.loadURL(winURL)
+  Menu.setApplicationMenu(menu)
 
   mainWindow.on('closed', () => {
     mainWindow = null
@@ -48,6 +90,13 @@ app.on('activate', () => {
   }
 })
 {{#if_eq builder 'builder'}}
+
+/**
+ * Customize application menu
+ */
+function customizeAppMenu (window, menu) {
+  /* const menuItem = menu.getMenuItemById('id') */
+}
 
 /**
  * Auto Updater

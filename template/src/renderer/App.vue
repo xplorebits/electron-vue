@@ -25,6 +25,8 @@
   }
 </script>
 
-<style>
+<style lang="sass">
+  @import "./styles/app"
+  @import "./styles/layouts"
   /* CSS */
 </style>
