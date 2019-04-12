@@ -19,7 +19,7 @@ const defaultLayout = 'default'
 
 {{/isEnabled}}
   export default {
-    name: '{{ name }}'{{#isEnabled plugins 'vue-router'}}{{else}},{{/isEnabled}}
+    name: '{{ name }}', {{#isEnabled plugins 'vue-router'}}{{else}},{{/isEnabled}}
 {{#isEnabled plugins 'vue-router'}}
 {{else}}
     components: {
