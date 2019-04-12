@@ -25,12 +25,12 @@ const defaultLayout = 'default'
     components: {
       LandingPage
     },
+{{/isEnabled}}
     computed: {
       layout () {
         return `${this.$route.meta.layout || defaultLayout}`
       }
     }
-{{/isEnabled}}
   }
 </script>
 
