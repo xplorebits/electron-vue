@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     {{#isEnabled plugins 'vue-router'}}
-    <router-view></router-view>
+    <compnent :is="layout">
+      <router-view></router-view>
+    </compnent>
     {{else}}
     <landing-page></landing-page>
     {{/isEnabled}}
@@ -10,6 +12,8 @@
 
 <script>
 {{#isEnabled plugins 'vue-router'}}
+const defaultLayout = 'default'
+
 {{else}}
   import LandingPage from '@/components/LandingPage'
 
@@ -20,6 +24,11 @@
 {{else}}
     components: {
       LandingPage
+    },
+    computed: {
+      layout () {
+        return `${this.$route.meta.layout || defaultLayout}`
+      }
     }
 {{/isEnabled}}
   }
