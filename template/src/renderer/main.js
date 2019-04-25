@@ -11,6 +11,9 @@ import router from './router'
 import store from './store'
 {{/isEnabled}}
 
+import Default from './layouts/Default'
+Vue.component('default', Default)
+
 const platform = require('os').platform
 
 Vue.prototype.$os = platform()
